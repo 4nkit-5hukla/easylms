@@ -45,16 +45,19 @@ async function cacheFirst (request) {
 
 async function networkFirst (request) {
 	const cache = await caches.open ('EasyCoaching-V1-dynamic');
-	if(request.url.search("chrome-extension:") < 0){
-		try {
-			const response = await fetch(request);
-			cache.put (request, response.clone());
-			return response;
-		} catch (error) {
-			const cachedResponse = await cache.match (request);
-			return cachedResponse || await caches.match (appPath + 'fallback.json');
-		}
-	}
+	if (
+    request.url.search("chrome-extension:") < 0 &&
+    request.url.search("webrtc.inovmercury.com") < 0
+  ) {
+    try {
+      const response = await fetch(request);
+      cache.put(request, response.clone());
+      return response;
+    } catch (error) {
+      const cachedResponse = await cache.match(request);
+      return cachedResponse || (await caches.match(appPath + "fallback.json"));
+    }
+  }
 }
 
 self.addEventListener('push', function(event) {

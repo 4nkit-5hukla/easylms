@@ -1,21 +1,26 @@
 <script>
-function start_test () {
-	var params = [
-		'channelmode=1',
-		'scrollbars=1',
-		'status=0',
-		'titlebar=0',
-		'toolbar=0',
-		'resizable=1',
-		'fullscreen=yes' /*only works in IE, but here for completeness*/
-	].join(',');
-	var testWindow = window.open ('<?php echo site_url ('student/tests/start_test/'.$coaching_id.'/'.$member_id.'/'.$course_id.'/'.$category_id.'/'.$test_id); ?>', "_blank", params);
-	if (testWindow.outerWidth < screen.availWidth || testWindow.outerHeight < screen.availHeight){
-	    testWindow.moveTo(0,0);
-	    testWindow.resizeTo(screen.availWidth, screen.availHeight);
-	}
-	testWindow.addEventListener("unload", function(event) {
-		document.location.href= "<?php echo site_url ('student/tests/my_tests/'.$coaching_id.'/'.$member_id); ?>";
+(function ($) {
+	$(document).ready(function(){
+		$('#start_test').click(function(e){
+			e.preventDefault();
+			const destination = $(this).attr('href');
+			navigator.mediaDevices
+				.getUserMedia({
+					audio: true,
+					video: true
+				})
+				.then(function (stream) {
+					window.location.href = destination;
+				})
+				.catch(function (error) {
+					$('#start_test').attr({
+						'aria-disabled': true,
+						'title': error.message,
+					})
+					.addClass('disabled')
+					.after(`<span class="text-danger my-auto ml-3">Media ${error.message}.</span>`);;
+				});
+		});
 	});
-}
+})(jQuery);
 </script>

@@ -153,6 +153,7 @@ class Tests extends MX_Controller {
 		} else {
 			$data['bc'] = array ('Course'=>'student/courses/try_course/'.$coaching_id.'/'.$member_id.'/'.$course_id);
 		}
+		$data['script'] = $this->load->view ('tests/scripts/test_instructions', $data, true);
 
 		$this->load->view(INCLUDE_PATH  . 'header', $data);
 		$this->load->view('tests/test_instructions',$data);
