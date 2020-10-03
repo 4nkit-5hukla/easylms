@@ -81,17 +81,17 @@
 		mediaRecorder . start(10000);
 		mediaRecorder.addEventListener('dataavailable', function (e) {
 			if (e.data.size > 0) {
-				fetch(`https://webrtc.inovmercury.com/save-file`, {
+				fetch(`<?php echo site_url("student/tests_actions/save_chunks/$coaching_id/$member_id/$course_id/$test_id"); ?>`, {
 						method: 'POST',
-						mode: 'cors',
 						headers: {
-							'Content-Type': 'application/octet-stream',
-							userId: <?php echo $member_id; ?>,
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
 							fileName: `${recStartTime.format(
 								'D, MMM YYYY'
-								)} Time ${recStartTime.format('hh-mm-ss')}`
-						},
-						body: e.data
+								)} Time ${recStartTime.format('hh-mm-ss')}`,
+							fileData: e.data
+						})
 					})
 					.then((res) => {
 						return res.json();

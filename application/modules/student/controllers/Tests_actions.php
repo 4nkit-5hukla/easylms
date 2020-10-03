@@ -124,7 +124,50 @@ class Tests_actions extends MX_Controller {
 		//$this->message->set ('You have successfully completed your test. Now you can review your scores', 'success', true);
 		redirect ('student/tests/test_submitted/'.$coaching_id.'/'.$course_id.'/'.$test_id.'/'.$member_id.'/'.$attempt_id);
 	}
-
+	public function get_recordings ($coaching_id=0, $member_id=0, $course_id=0, $test_id=0){
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://webrtc.inovmercury.com/api/saved-recordings/$member_id",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
+				"Content-Type: application/json",
+			)
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		$this->output->set_content_type("application/json");
+		$this->output->set_output($response);
+	}
+	public function save_chunks ($coaching_id=0, $member_id=0, $course_id=0, $test_id=0) {
+		$data = json_decode($this->request, true);
+		extract($data);
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://webrtc.inovmercury.com/save-file",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => $fileData,
+			CURLOPT_HTTPHEADER => array(
+				"Content-Type: application/octet-stream",
+				"fileName: $fileName"
+			)
+		));
+		$response = curl_exec($curl);
+		curl_close($curl);
+		$this->output->set_content_type("application/json");
+		$this->output->set_output($response);
+	}
 	public function request_reset ($coaching_id=0, $member_id=0, $test_id=0, $attempt_id=0) {
 		$this->message->set ('Reset request has been sent. Please wait till the test become available again', 'success', true);
 		redirect ('student/tests/index/'.$coaching_id.'/'.$member_id.'/'.$test_id);
