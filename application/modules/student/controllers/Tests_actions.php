@@ -145,7 +145,7 @@ class Tests_actions extends MX_Controller {
 		$this->output->set_output($response);
 	}
 	public function save_chunks ($coaching_id=0, $member_id=0, $course_id=0, $test_id=0) {
-		$data = json_decode($this->request, true);
+		$data = json_decode($this->input->raw_input_stream, true);
 		extract($data);
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
