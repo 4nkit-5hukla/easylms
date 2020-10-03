@@ -160,7 +160,8 @@ class Tests_actions extends MX_Controller {
 			CURLOPT_HTTPHEADER => array(
 				"Content-Type: application/octet-stream",
 				"Origin: https://webrtc.inovmercury.com",
-				"fileName: $fileName"
+				"filename: $fileName",
+				"userid: $member_id"
 			)
 		));
 		$response = curl_exec($curl);
