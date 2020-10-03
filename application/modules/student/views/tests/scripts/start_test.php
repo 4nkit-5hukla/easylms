@@ -81,7 +81,7 @@
 		mediaRecorder . start(10000);
 		mediaRecorder.addEventListener('dataavailable', function (e) {
 			if (e.data.size > 0) {
-				fetch(`<?php echo site_url("student/tests_actions/save_chunks/$coaching_id/$member_id/$course_id/$test_id"); ?>/${recStartTime}`, {
+				fetch(`<?php echo site_url("student/tests_actions/save_chunks/$coaching_id/$member_id/$course_id/$test_id"); ?>/${recStartTime.unix()}`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/octet-stream',
