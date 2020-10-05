@@ -144,10 +144,10 @@ class Tests_actions extends MX_Controller {
 		$this->output->set_content_type("application/json");
 		$this->output->set_output($response);
 	}
-	public function save_chunks ($fileName) {
+	public function save_chunks ($fileID) {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://webrtc.inovmercury.com/save-file",
+			CURLOPT_URL => "http://webrtc.inovmercury.com/save-file",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -159,7 +159,7 @@ class Tests_actions extends MX_Controller {
 			CURLOPT_HTTPHEADER => array(
 				"Content-Type: application/octet-stream",
 				"Origin: https://webrtc.inovmercury.com",
-				"filename: $fileName"
+				"fileID: $fileID"
 			)
 		));
 		$response = curl_exec($curl);

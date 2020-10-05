@@ -38,8 +38,8 @@ class Report_actions extends MX_Controller {
 		
 	}
 	public function get_recording ($coaching_id,  $member_id,  $course_id,  $test_id,  $attempt_id){
-		$fileName = md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.");
-		$filePath = "https://webrtc.inovmercury.com/uploads/$fileName.webm";
+		$fileName = hash("adler32", "$coaching_id.$member_id.$course_id.$test_id.$attempt_id");
+		$filePath = "http://webrtc.inovmercury.com/video/$fileName";
 		$fileData = file_get_contents($filePath);
 		if (@$fileData) {
 			$this->output->set_content_type('video/webm');
