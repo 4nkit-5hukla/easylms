@@ -1,6 +1,7 @@
 <script src="<?php echo base_url(THEME_PATH . 'assets/js/vendor/plyr.min.js'); ?>"></script>
 <script>
 (function ($) {
+  // let player = $("#player").get(0);
   $("#player").css("--plyr-color-main", themeColor1);
   let player = new Plyr($("#player").get(0), {
     clickToPlay: true,

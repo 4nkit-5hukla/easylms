@@ -1,7 +1,7 @@
 <script src="<?php echo base_url(THEME_PATH . 'assets/js/vendor/moment.min.js'); ?>"></script>
 <script>
 (function ($) {
-	let mediaRecorder, recStartTime, fileName = '<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.") ?>';
+	let mediaRecorder, recStartTime, fileName = '<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id") ?>';
 	/*Multi Select questions checkboxes toggle*/
 	function mcmc_deselect (blankid, qid) {
 		if ( blankid.checked == true) {
