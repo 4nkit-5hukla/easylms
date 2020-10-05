@@ -29,7 +29,7 @@
 							<?php 
 							$user_name = $row['first_name'] . ' ' .$row['last_name'];
 							if ($row['submitted'] == 1 || ($row['submitted'] == 0 && $row['submit_time'] > 0)) {
-								echo anchor('coaching/reports/all_reports/'.$coaching_id.'/'.$row['attempt_id'].'/'.$row['member_id'].'/'.$test_id, $user_name, array('class'=>'btn-link') );
+								echo anchor('coaching/reports/all_reports/'.$coaching_id.'/'.$course_id.'/'.$row['attempt_id'].'/'.$row['member_id'].'/'.$test_id, $user_name, array('class'=>'btn-link') );
 							} else {
 								echo $user_name;
 							}

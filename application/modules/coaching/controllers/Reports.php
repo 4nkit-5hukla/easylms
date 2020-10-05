@@ -54,7 +54,7 @@ class Reports extends MX_Controller {
 		$this->load->view(INCLUDE_PATH . 'footer', $data);
 	}
 
-	public function all_reports ($coaching_id=0, $attempt_id=0, $member_id=0, $test_id=0, $type=SUMMARY_REPORT, $nav='' ) {
+	public function all_reports ($coaching_id=0, $course_id=0, $attempt_id=0, $member_id=0, $test_id=0, $type=SUMMARY_REPORT, $nav='' ) {
 		
 		// Get latest attempt
 		if ($attempt_id == 0) {
@@ -62,7 +62,7 @@ class Reports extends MX_Controller {
 		}
 
 		if ($attempt_id == 0) {
-			redirect ('coaching/reports/submissions/'.$coaching_id.'/'.$category_id.'/'.$test_id);
+			redirect ('coaching/reports/submissions/'.$coaching_id.'/'.$course_id.'/'.$test_id);
 		}
 
 		// Get member_id
@@ -179,7 +179,6 @@ class Reports extends MX_Controller {
 		$data['brief']['ob_perc'] 		= $ob_perc;
 		$data['brief']['accuracy'] 		= $accuracy;
 		$data['coaching_id'] 			= $coaching_id;
-		$category_id 				= $test['category_id'];
 		$data['test'] 				= $test;
 		$data['cat_response'] 		= $cat_response;
 		$data['dif_response'] 		= $dif_response;
@@ -196,10 +195,13 @@ class Reports extends MX_Controller {
 		$data['reports'] 			= $reports;
 		$data['num_questions'] 		= $num_questions;
 		$data['nav'] 				= $nav;
+		$data['coaching_id'] = $coaching_id;
+		$data['course_id'] = $course_id;
+		$data['test_id'] = $test_id;
 		$data['page_title'] 		= 'Reports';
 
-		$data['bc'] = array ('Submissions'=>'coaching/reports/submissions/'.$coaching_id.'/'.$category_id.'/'.$test_id);
-		
+		$data['bc'] = array ('Submissions'=>'coaching/reports/submissions/'.$coaching_id.'/'.$course_id.'/'.$test_id);
+		$data['style'] = '<link rel="stylesheet" href="' . base_url(THEME_PATH . 'assets/css/vendor/plyr.min.css') . '" />';
 		$data['script'] = $this->load->view ('reports/scripts/'.$reports[$type]['script_file'], $data, true);
 		$this->load->view(INCLUDE_PATH . 'header', $data);
 		$this->load->view('reports/all_reports', $data);

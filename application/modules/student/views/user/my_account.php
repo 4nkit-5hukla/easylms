@@ -137,7 +137,7 @@
 
 <!-- Add Image -->
 <div class="modal" tabindex="-1" role="dialog" id="add_image">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
 	  <?php echo form_open_multipart ('student/user_actions/upload_profile_picture/'.$member_id.'/'.$coaching_id, array ('class'=>'form-horizontal row-border', 'id'=>'upload_image')); ?>
             <div class="modal-header">

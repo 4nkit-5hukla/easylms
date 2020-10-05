@@ -37,6 +37,18 @@ class Report_actions extends MX_Controller {
 		}
 		
 	}
-
-
+	public function get_recording ($coaching_id,  $member_id,  $course_id,  $test_id,  $attempt_id){
+		$fileName = md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.");
+		$filePath = "https://webrtc.inovmercury.com/uploads/$fileName.webm";
+		$fileData = file_get_contents($filePath);
+		if (@$fileData) {
+			$this->output->set_content_type('video/webm');
+			$this->output->set_header('Content-disposition: inline');
+			$this->output->set_header("Content-Transfer-Encoding:­ binary");
+			$this->output->set_header("Content-Length: " . $fileData);
+			$this->output->set_output($fileData);
+		}else{
+			show_404();
+		}
+	}
 }

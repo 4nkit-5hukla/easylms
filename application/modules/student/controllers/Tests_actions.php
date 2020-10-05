@@ -127,7 +127,7 @@ class Tests_actions extends MX_Controller {
 	public function get_recordings ($coaching_id=0, $member_id=0, $course_id=0, $test_id=0){
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://webrtc.inovmercury.com/api/saved-recordings/$member_id",
+			CURLOPT_URL => "https://webrtc.inovmercury.com/api/saved-recordings",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -144,7 +144,7 @@ class Tests_actions extends MX_Controller {
 		$this->output->set_content_type("application/json");
 		$this->output->set_output($response);
 	}
-	public function save_chunks ($coaching_id=0, $member_id=0, $course_id=0, $test_id=0, $recording_time) {
+	public function save_chunks ($fileName) {
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => "https://webrtc.inovmercury.com/save-file",
@@ -159,8 +159,7 @@ class Tests_actions extends MX_Controller {
 			CURLOPT_HTTPHEADER => array(
 				"Content-Type: application/octet-stream",
 				"Origin: https://webrtc.inovmercury.com",
-				"filename: $recording_time",
-				"userid: $member_id"
+				"filename: $fileName"
 			)
 		));
 		$response = curl_exec($curl);

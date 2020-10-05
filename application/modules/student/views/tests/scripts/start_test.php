@@ -1,7 +1,7 @@
 <script src="<?php echo base_url(THEME_PATH . 'assets/js/vendor/moment.min.js'); ?>"></script>
 <script>
 (function ($) {
-	let mediaRecorder, recStartTime;
+	let mediaRecorder, recStartTime, fileName = '<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.") ?>';
 	/*Multi Select questions checkboxes toggle*/
 	function mcmc_deselect (blankid, qid) {
 		if ( blankid.checked == true) {
@@ -81,7 +81,7 @@
 		mediaRecorder . start(10000);
 		mediaRecorder.addEventListener('dataavailable', function (e) {
 			if (e.data.size > 0) {
-				fetch(`<?php echo site_url("student/tests_actions/save_chunks/$coaching_id/$member_id/$course_id/$test_id"); ?>/${recStartTime.unix()}`, {
+				fetch(`<?php echo site_url("student/tests_actions/save_chunks"); ?>/${fileName}`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/octet-stream',
