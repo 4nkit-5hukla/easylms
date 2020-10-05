@@ -29,7 +29,6 @@
 		</div>
 	</div>
 </div>
-<?php printf("uniqid('php_'): %s\r\n", uniqid('php_')); ?>
 <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="play-video">
   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
