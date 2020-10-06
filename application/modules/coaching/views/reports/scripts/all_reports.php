@@ -1,21 +1,13 @@
-<script src="<?php echo base_url(THEME_PATH . 'assets/js/vendor/plyr.min.js'); ?>"></script>
 <script>
 (function ($) {
-  // let player = $("#player").get(0);
-  $("#player").css("--plyr-color-main", themeColor1);
-  let player = new Plyr($("#player").get(0), {
-    clickToPlay: true,
-    resetOnEnd: true,
-    tooltips: { controls: true, seek: true },
-    controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'download', 'fullscreen'],
-    // urls: {download: 'https://webrtc.inovmercury.com/download-file/<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.") ?>'},
-  });
-	$(document).ready (function () {
+  $(document).ready (function () {
+    let player = videojs("player");
 		$("#play-video").on("shown.bs.modal", function(e){
+      player.src({ type: "video/webm", src: "//webrtc.inovmercury.com/video/<?php echo $recording_file; ?>" });
       player.play();
     });
-    $("#play-video").on("hidden.bs.modal", function(e){
-      player.stop();
+    $("#play-video").on("hide.bs.modal", function(e){
+      player.reset();
     });
 	});
 })(jQuery);

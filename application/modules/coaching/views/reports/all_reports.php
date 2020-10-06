@@ -30,7 +30,7 @@
 	</div>
 </div>
 <div class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="play-video">
-  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
             <div class="modal-header p-3">
                 <h5 class="modal-title">Attempt Recording</h5>
@@ -39,12 +39,20 @@
                 </button>
             </div>
 			<div class="modal-body p-0">
-				<video id="player" crossorigin style="max-height:70vh;">
-          <source id="player-src" src="<?php echo site_url("coaching/report_actions/get_recording/$coaching_id/$member_id/$course_id/$test_id/$attempt_id"); ?>" type="video/webm" />
-        </video>
-			</div>
-			<div class="modal-footer p-3 justify-content-start d-none">
-				<a class="btn btn-primary" id="download-video" href="https://webrtc.inovmercury.com/download-file/<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.") ?>" download="<?php echo md5("$coaching_id.$member_id.$course_id.$test_id.$attempt_id.") ?>.mp4">Download <i class="fas fa-download"></i></a>
+				<div class="position-relative">
+					<video id="player" class="video-js vjs-fluid" crossorigin controls preload="auto" data-setup="{}">
+						<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+					</video>
+					<a
+						href="//webrtc.inovmercury.com/download-file/<?php echo $recording_file; ?>"
+						download="<?php echo "$recording_file.mp4"; ?>"
+						class="position-absolute btn bg-white btn-sm text-primary py-1 px-2"
+						style="top:1.5rem;right:1.5rem;z-index: 1;"
+					>
+						<i class="fas fa-download mx-1"></i>
+					</a>
+				</div>
+				<span class="d-none"><?php echo site_url("coaching/report_actions/get_recording/$coaching_id/$member_id/$course_id/$test_id/$attempt_id"); ?></span>
 			</div>
 	</div>
   </div>

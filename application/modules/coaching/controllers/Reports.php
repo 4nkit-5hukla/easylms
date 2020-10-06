@@ -199,9 +199,9 @@ class Reports extends MX_Controller {
 		$data['course_id'] = $course_id;
 		$data['test_id'] = $test_id;
 		$data['page_title'] 		= 'Reports';
+		$data['recording_file'] = hash("adler32", "$coaching_id.$member_id.$course_id.$test_id.$attempt_id");
 
 		$data['bc'] = array ('Submissions'=>'coaching/reports/submissions/'.$coaching_id.'/'.$course_id.'/'.$test_id);
-		$data['style'] = '<link rel="stylesheet" href="' . base_url(THEME_PATH . 'assets/css/vendor/plyr.min.css') . '" />';
 		$data['script'] = $this->load->view ('reports/scripts/'.$reports[$type]['script_file'], $data, true);
 		$this->load->view(INCLUDE_PATH . 'header', $data);
 		$this->load->view('reports/all_reports', $data);
