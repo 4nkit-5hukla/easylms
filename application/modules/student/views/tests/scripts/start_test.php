@@ -77,13 +77,14 @@
 		};
 		mediaRecorder = new MediaRecorder(stream, options);
 		recStartTime = moment();
-		mediaRecorder . start(10000);
+		mediaRecorder . start(5000);
 		mediaRecorder.addEventListener('dataavailable', function (e) {
 			if (e.data.size > 0) {
-				fetch(`<?php echo site_url("student/tests_actions/save_chunks"); ?>/${fileName}`, {
+				fetch(`https: //webrtc.inovmercury.com/save-file`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/octet-stream',
+							fileId: fileName
 						},
 						body: e.data
 					})
